@@ -1,0 +1,107 @@
+/*Override nextra style*/
+.article-container > article.x\:container {
+    @apply max-w-[768px] py-0;
+}
+
+.content-wrapper > :first-child {
+    @apply mt-0;
+}
+.content-wrapper > :last-child {
+    @apply mb-0;
+}
+
+
+/*Dev style*/
+@layer utilities {
+    .decor-marks {
+        @apply text-muted-foreground opacity-30 pointer-events-none select-none;
+    }
+    .dev-borders {
+        @apply border border-dashed border-brand/20;
+    }
+    .dev-borders-y {
+        @apply border border-dashed border-brand/20;
+        @apply border-x-0;
+    }
+    .dev-gap-bg {
+        background:url(
+        data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAARUlEQVR4AYzMQQ4AEBADQFw8wQu9ygs9wYnsQbJly/bUJpOmoFLamGpCBdhrjgwDlAuGL8iwCS1M4YmfUOMv3NgFBbvhAgAA//+tp1XBAAAABklEQVQDABNjHBU19V/QAAAAAElFTkSuQmCC
+        ) repeat;
+    }
+}
+
+@layer utilities {
+    .px-bg-pattern-transparent {
+        --tile-color:rgba(68, 76, 247, 0.04);
+        --bg-color:var(--background);
+        background-color:var(--bg-color);
+        background-image:repeating-linear-gradient(
+            45deg,
+            var(--tile-color) 25%,
+            transparent 25%,
+            transparent 75%,
+            var(--tile-color) 75%,
+            var(--tile-color)
+        ),
+        repeating-linear-gradient(
+            45deg,
+            var(--tile-color) 25%,
+            var(--bg-color) 25%,
+            var(--bg-color) 75%,
+            var(--tile-color) 75%,
+            var(--tile-color)
+        );
+        background-position:0 0, 10px 10px;
+        background-size:20px 20px;
+    }
+    .dark .px-bg-pattern-transparent {
+        --tile-color:rgba(255, 255, 255, 0.015);
+        --bg-color:#24292e;
+    }
+
+    .px-bg-diagonal {
+        --tile-color:rgba(68, 76, 247, 0.3);
+        --bg-color:var(--background);
+        background-color:var(--bg-color);
+
+        opacity:1;
+        background-image:radial-gradient(var(--tile-color) 0.75px, var(--bg-color) 0.75px);
+        background-size:15px 15px;
+    }
+    .dark .px-bg-diagonal {
+        --tile-color:rgba(255, 255, 255, 0.2);
+        --bg-color:#24292e;
+    }
+
+    .px-border {
+        @apply border border-dashed border-border rounded-md;
+    }
+
+    .px-bg-blur {
+        @apply bg-background/30 backdrop-blur supports-[backdrop-filter]:bg-background/50;
+    }
+}
+
+/* ── BRUTALIST ─────────────────────────────────────────── */
+
+article hr {
+    border: none;
+    border-top: 2px solid #0033FF;
+    margin: 2rem 0;
+}
+
+article a:hover {
+    color: #0033FF;
+    text-decoration-color: #0033FF;
+}
+
+/* CRT scanlines in dark mode */
+.dark body {
+    background-image: repeating-linear-gradient(
+        0deg,
+        transparent,
+        transparent 3px,
+        rgba(0, 0, 0, 0.04) 3px,
+        rgba(0, 0, 0, 0.04) 4px
+    );
+}

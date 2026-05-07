@@ -1,0 +1,9 @@
+node_modules
+.next
+/.idea
+_pagefind/
+.env
+public/r/
+registry.json
+tsconfig.tsbuildinfo
+.claude/settings.local.json

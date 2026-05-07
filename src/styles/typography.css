@@ -1,0 +1,39 @@
+.x\:prose {
+    --tw-prose-body:var(--foreground);
+}
+
+@layer utilities {
+    /* Applied explicitly to hero name/title only */
+    .brut-h1 {
+        font-size: clamp(3rem, 8vw, 6rem);
+        font-weight: 800;
+        letter-spacing: -0.04em;
+        line-height: 0.88;
+        text-transform: uppercase;
+        margin-bottom: 0.5rem;
+    }
+
+    .heading-2 {
+        @apply text-[1.3em] font-bold;
+        margin-top: 2rem;
+        margin-bottom: 0.5rem;
+    }
+    .heading-3 {
+        @apply text-[1.1em] font-semibold;
+        margin-top: 1.5rem;
+        margin-bottom: 0.25rem;
+    }
+    .heading-4 {
+        @apply text-[1em] font-semibold;
+    }
+
+    .p-button {
+        box-shadow:0 8px 12px #0000000f, 0 4px 8px #00000014, 0 1px 2px #0000001f, inset 0 1.5px 1px #ffffff47;
+        @apply border border-brand-accent;
+        @apply text-xs transition-none cursor-pointer;
+        @apply bg-brand text-brand-foreground rounded-md px-2 py-1;
+        @apply inline-flex items-center justify-center text-center gap-2;
+
+        @apply hover:bg-brand-accent;
+    }
+}
