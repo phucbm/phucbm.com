@@ -1,125 +1,178 @@
-# Design System: phucbm.dev
+# Design System: phucbm.com
 
 ## 1. Visual Theme & Atmosphere
 
-**Industrial Brutalism — Tactical Monospace.**
+**Editorial Minimalism — Content as Structure.**
 
-The site fuses Swiss industrial print with a terminal/telemetry aesthetic. The overall mood is **mechanical precision under restraint** — bold structural lines and high typographic contrast, but never loud. The warm substrates (cream in light, near-black in dark) soften the rigidity just enough to feel personal, not institutional.
+The site fuses personal publishing with frontend craft. The overall mood is
+**quiet confidence** — warm typographic hierarchy and generous whitespace, but
+never sparse. The parchment substrate and Garamond headings signal a person
+who reads and thinks, not just ships.
 
-The design philosophy: structure does the talking. No gradients, no soft shadows, no rounded corners. Every element sits on a visible grid. Negative space is generous; when something breaks the silence, it means something.
+The design philosophy: content does the talking. No gradients, no shadows, no
+decorative elements. Sections are separated by whitespace and hairline rules.
+When something appears, it earns its place.
 
 **Key Characteristics:**
-- Sharp, 90-degree corners across all components
-- Hard 1–2px solid borders as the primary UI language
-- Monospace typography at every scale — from hero headline to micro-label
-- Bimodal density: vast breathing room interrupted by data-dense grid blocks
-- Single blue accent for structural dividers and interactive highlights
-- Warm backgrounds (cream / near-black) soften the mechanical grid
+- Serif headings (EB Garamond) paired with geometric sans body (Plus Jakarta Sans)
+- Hairline 0.5px borders as the only UI structure
+- Warm parchment background softens the editorial column
+- Single dusty blue accent for all interactive and link states
+- Italic section titles as the primary visual rhythm marker
+- No cards, no badges, no custom MDX components in content files
 
 ---
 
 ## 2. Color Palette & Roles
 
-### Light Mode (default)
-- **Warm Cream Canvas** (`#faf5e9`) — Page background. Unbleached paper warmth, not pure white.
-- **Carbon Ink** (`#111111`) — Primary text and structural borders (header, footer 2px rules).
-- **Stone Border** (`#bfb9b0`) — Grid cell borders, dividers, component outlines.
-- **Parchment Muted** (`#f0ece3`) — Secondary surfaces, hover backgrounds, tag fills.
-- **Graphite Secondary** (`#555555`) — Muted text: labels, descriptions, metadata.
+### Light Mode
+- **Parchment** (`#F5F3EF`) — Page background. Warm, unbleached, not pure white.
+- **Ink** (`#1E1C18`) — Primary text, headings, structural elements.
+- **Stone** (`#3A3830`) — Body text, paragraph content.
+- **Graphite** (`#5A5248`) — Secondary text, descriptions, metadata.
+- **Dust** (`#8A8070`) — Muted text, dates, italic footnotes, currently line.
+- **Hairline** (`#D6D3CC`) — All borders: nav, section dividers, footer.
+- **Surface** (`#FAF9F6`) — Subtle background for hover states only.
 
 ### Dark Mode
-- **Warm Dark** (`#15120d` via page bg / `#1a1a1a` via CSS) — Page background. Warmer than pure black, avoids clinical CRT feel.
-- **Phosphor White** (`#eaeaea`) — Primary text.
-- **Ghost Border** (`rgba(255,255,255,0.2)`) — Grid cell borders, subtle but present.
+- Tokens swap via `.dark` class. Warm dark background, not pure black.
+- All color tokens defined as CSS variables, dark variants set on `.dark`.
 
 ### Accent (both modes)
-- **Electric Swiss Blue** (`#0033FF`) — The single accent color. Used for: `<hr>` structural dividers, link hover states, active filter states, button backgrounds, ticker/status bar border highlights. Inspired by Swiss modernist print; feels technical and declarative against warm backgrounds.
-- **Deep Blue** (`#0026CC`) — Hover/pressed state for blue interactive elements.
+- **Dusty Blue** (`#2D5A8E`) — The single accent color. Used for: link hover
+  states, "open to work" indicator, section "view all" links, footer link
+  hovers. High contrast, accessible, never decorative.
+- **Blue tint** (`#2D5A8E14`) — Accent background, used sparingly.
+- **Blue border** (`#2D5A8E44`) — Underline on links at rest.
 
 ---
 
 ## 3. Typography Rules
 
-**Font Family:** JetBrains Mono variable (`wght` axis, 100–900)
-**Base Size:** 16px · **Line Height:** 1.5
+**Heading font:** EB Garamond (`subset=vietnamese`)
+**Body font:** Plus Jakarta Sans (`subset=vietnamese`)
+**Both fonts must include Vietnamese subset** — the site publishes Vietnamese
+content and language learning notes.
 
-A single monospace family carries the entire typographic system — this is deliberate. The scale variance (from 96px hero to 10px micro-label) creates all the hierarchy. No display font is needed; the weight axis (800 for hero, 400 for body) provides sufficient contrast.
+**Base size:** 18px · **Line height:** 1.85 (body), 1.3 (headings)
+
+**Hard rule: No UI element may render below 18px font size.** This applies to
+nav links, footer links, metadata, descriptions, labels — everything visible
+to the user. The only exception is sub-pixel decorative borders.
+
+Two fonts carry the full typographic system. EB Garamond handles all headings
+and section titles. Plus Jakarta Sans handles all body, navigation, labels, and
+metadata. Weight is kept light throughout — Garamond at 400, Plus Jakarta Sans
+at 300 for body and 400 for UI elements.
 
 ### Scale
 
-| Role | Size | Weight | Transform | Tracking |
+| Role | Font | Size | Weight | Style |
 |---|---|---|---|---|
-| Hero / Page title | `clamp(3rem, 8vw, 6rem)` | 800 | Uppercase | −0.04em |
-| Section heading h2 | 1.3em | 700 | — | — |
-| Sub-heading h3 | 1.1em | 600 | — | — |
-| Body | 1rem (16px) | 400 | — | — |
-| Component title | 0.75rem | 700 | Uppercase | 0.1em wide |
-| Filter label / tag | 0.75rem | 400 | Uppercase | 0.1em wide |
-| Micro-label (StatusBar) | 0.6rem | 400 | Uppercase | Wide |
-| Ticker strip | 0.65rem | 400 | Uppercase | 0.15em |
+| Page heading h1 | EB Garamond | 30px | 400 | Normal |
+| Section title | EB Garamond | 20px | 400 | Italic |
+| Item title | Plus Jakarta Sans | 18px | 400 | Normal |
+| Body / description | Plus Jakarta Sans | 18px | 300 | Normal |
+| Nav links | Plus Jakarta Sans | 18px | 400 | Normal |
+| Meta / dates / muted | Plus Jakarta Sans | 18px | 300 | Italic |
+| Footer links | Plus Jakarta Sans | 18px | 300 | Normal |
+| Nav logo | EB Garamond | 18px | 400 | Normal |
 
-**Hero headline** (`brut-h1`): `line-height: 0.88` — glyphs form a solid architectural block. Applied explicitly to `<HeroName>` on the homepage only.
+**Section titles** are always italic EB Garamond. This is the primary visual
+rhythm marker across the homepage and all section pages.
+
+**Never use font-weight above 500.** The pairing relies on contrast between
+serif and sans, not weight contrast.
 
 ---
 
-## 4. Component Stylings
+## 4. Component Styling
 
-### Buttons
-- **Shape:** Sharp squared edges (0 border-radius globally enforced)
-- **Primary:** Electric Swiss Blue (`#0033FF`) background, white text, no shadow
-- **Filter buttons:** `border: 1px solid var(--border)`, `bg-accent` fill, uppercase tracking. Active state: blue border + blue text + `bg-brand/10` tint.
-- **No hover lift effects.** Hover = color/border change only.
+### Navigation
+- Logo: pixel art icon, links to homepage.
+- Links (curated): Bookmarks, Components only. Plus Jakarta Sans 18px,
+  color `#5A5248` at rest, `#2D5A8E` on hover.
+- ThemeSwitch on the right.
+- `border-bottom: 0.5px solid #D6D3CC` separates nav from content.
+- No active underline, no hamburger menu, no icons, no decorative brackets.
 
-### Cards & Grid Cells (Components, Projects, Clients)
-- **Technique:** Container has `border-top + border-left`. Each cell has `border-right + border-bottom`. Creates a razor-thin 1px grid without doubled borders.
-- **Background:** Transparent by default. Hover: `bg-muted` (parchment tint in light, subtle white in dark).
-- **Padding:** `px-3 py-2` (Clients/Stack) · `px-4 py-4` (Components/Projects — more content)
-- **Shadow:** None.
-- **Corner:** 0px.
+### Hero / Bio Section
+- H1 in EB Garamond 30px, two lines max.
+- Body paragraph in Plus Jakarta Sans 18px weight 300.
+- Currently line: italic, 18px, color `#8A8070`, inline with "open to work"
+  link in dusty blue.
+- `border-bottom: 0.5px solid #D6D3CC` closes the section.
 
-### Status Bar
-- 4-cell hard grid. Top-left label in micro-uppercase (`0.6rem`, muted). Bottom value in small bold uppercase (`0.75rem`). Full-width, bleeds to container edges.
+### Section Headers
+- Section title (italic Garamond 20px) on its own line.
+- `margin-bottom: 1.5rem` before content.
 
-### Ticker
-- `border-top + border-bottom`, 1px `var(--border)`. Content scrolls via CSS `@keyframes` at `translateX(-50%)`. Speed: 35s. Items joined by ` /// `.
+### Project / Writing Lists
+- Plain `<ul>` with no bullets. Each item: title link + description paragraph.
+- Title: 18px weight 400, `#1E1C18`, underline `#1E1C1830` at rest, goes
+  dusty blue on hover.
+- Description: 18px weight 300, `#5A5248`, line-height 1.7.
+- Gap between items: `1.5rem`.
+- No cards, no borders, no background fills on items.
 
-### Navigation Links
-- No underline by default. Hover: `color: #0033FF`. Active/current: `text-primary` (foreground).
-- Wrapped in `[ ... ]` ASCII decoration brackets — structural graphic element.
+### Writing Placeholder
+- Single italic paragraph in `#8A8070` when no posts exist yet.
+- Replaced by writing list once posts are published.
 
-### Horizontal Rules (`<hr>`)
-- `border-top: 2px solid #0033FF`. No spacing softness. Used as strong section breaks.
+### Previously / Clients
+- Single prose paragraph. Client names bolded (`font-weight: 400`,
+  `color: #1E1C18`) within surrounding weight-300 text.
+- No logo grid, no list, no cards.
 
-### Structural Chrome (Header / Footer)
-- **Header:** `border-bottom: 2px solid var(--foreground)` — the primary horizontal landmark.
-- **Footer:** `border-top: 2px solid var(--foreground)` — closes the frame.
+### Footer
+- `border-top: 0.5px solid #D6D3CC`.
+- Left: copyright, 18px weight 300, `#8A8070`.
+- Right: secondary links (all non-nav pages + GitHub, RSS), same style.
+
+### Horizontal Rules
+- `border-top: 0.5px solid #D6D3CC`. Hairline only, never accent color.
 
 ---
 
 ## 5. Layout Principles
 
 ### Container
-- Max content width: **768px**, centered.
-- Outer padding: `px-1` (minimal — content sits close to edges).
-- The tight container against the warm full-bleed background creates a contained editorial column feel.
+- Max content width: **640px**, centered.
+- Outer padding: `2.5rem` horizontal.
+- Full-bleed parchment background behind the centered column.
 
 ### Spacing Rhythm
-- Base unit: `4px` (via `--spacing`)
-- Gaps between sections: `Gap` component (`height = 14` = 56px above/below content area)
-- Section heading margin-top: `2rem` (h2), `1.5rem` (h3)
+- Section padding: `2.5rem` top and bottom.
+- Hero padding: `4rem` top, `3rem` bottom.
+- Item gaps within sections: `1.25rem` to `1.5rem`.
+- Nav padding: `1.5rem` vertical, `2.5rem` horizontal.
 
-### Grid System
-- All data grids use CSS Grid with hard border technique (no `gap`).
-- 2-col default on mobile, 3-col on desktop for component/tag grids.
-- 2-col for project grids.
-- 3-col for client/stack name grids.
+### MDX Content Rules
+- All content pages are `.mdx`.
+- MDX files use only standard markdown syntax: headings, paragraphs, links,
+  lists, code blocks, blockquotes.
+- No custom layout components called inside `.mdx` files.
+- Registry-specific components (RegistryInstall, RegistryDemo, etc.) are
+  allowed inside component documentation pages only.
+
+### Borders
+- All borders are `0.5px solid`. Never 1px, never 2px.
+- Only hairline `#D6D3CC` in structural use. Dusty blue border only on
+  interactive link underlines.
+- No `box-shadow` anywhere.
+- `border-radius: 0` on all elements.
 
 ### Dark Mode
-- CRT scanline texture: `repeating-linear-gradient` at 4px pitch, 4% opacity — barely perceptible grain.
-- All color tokens swap via `.dark` class on `<html>`.
+- Warm dark background, not `#000000`.
+- All tokens via CSS variables, dark variants on `.dark` class.
+- Vietnamese diacritics must render correctly in both modes — test with
+  ắ ặ ổ ợ ữ ế ồ ơ ư.
 
 ### Design Decisions to Preserve
-- `border-radius: 0 !important` globally — never introduce rounded corners.
-- One accent color only — do not add secondary accent colors.
-- No soft shadows (`box-shadow`) on interactive elements — borders carry all depth.
-- No Google Fonts — JetBrains Mono only.
+- Two fonts only: EB Garamond and Plus Jakarta Sans. Never add a third.
+- One accent color only: `#2D5A8E`. Never introduce a second accent.
+- No custom layout components inside MDX content files.
+- No cards, badges, tags, or chip elements anywhere on the site.
+- Font weight ceiling: 500. Never use 600, 700, or bold.
+- Section titles are always italic EB Garamond. Never break this pattern.
+- No UI element may render below 18px font size. This is a hard rule.

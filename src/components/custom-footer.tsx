@@ -1,40 +1,30 @@
-import {getPageMap} from "nextra/page-map";
-import {normalizePages, PageItem} from 'nextra/normalize-pages'
-import type {MenuItem} from 'nextra'
-import {NavbarLink} from "@/components/navbar-link";
 import React from "react";
 
-type ExtendedNavbarItem = (PageItem | MenuItem) & {
-    href?: string;
-}
+const FOOTER_LINKS = [
+    {href: '/connect', title: 'Connect'},
+    {href: '/uses', title: 'Uses'},
+    {href: '/now', title: 'Now'},
+    {href: '/colophon', title: 'Colophon'},
+    {href: '/stats', title: 'Stats'},
+    {href: 'https://github.com/phucbm', title: 'GitHub', external: true},
+    {href: '/feed.xml', title: 'RSS'},
+]
 
-const CustomFooter = async () => {
-    const pageMap = await getPageMap()
-    const {topLevelNavbarItems} = normalizePages({list: pageMap, route: '/'})
-
-    const navItems = topLevelNavbarItems
-        .filter(item => item.display !== 'hidden')
-        .map(item => {
-            const extended = item as ExtendedNavbarItem
-            return {
-                href: ('route' in extended ? extended.route : extended.href) || '',
-                title: extended.title,
-            }
-        })
-
+const CustomFooter = () => {
     return (
-        <div className="custom-footer border-t-2 border-foreground py-3 px-1" data-pagefind-ignore="all">
-            <div className="columns-2 sm:columns-3 md:columns-4 gap-x-6 mb-3">
-                {navItems.map(({href, title}) => (
-                    <div key={href} className="mb-1 break-inside-avoid">
-                        <NavbarLink href={href}>
-                            {title}
-                        </NavbarLink>
-                    </div>
+        <div className="border-t-hairline pt-6 flex justify-between items-start gap-8 text-sm" data-pagefind-ignore="all">
+            <span className="">© {new Date().getFullYear()} Phuc Bui</span>
+            <div className="flex flex-wrap gap-x-4 gap-y-1 justify-end">
+                {FOOTER_LINKS.map(({href, title, external}) => (
+                    <a
+                        key={href}
+                        href={href}
+                        className="no-underline text-current hover:text-brand-accent"
+                        {...(external ? {target: '_blank', rel: 'noopener noreferrer'} : {})}
+                    >
+                        {title}
+                    </a>
                 ))}
-            </div>
-            <div className="border-t border-foreground pt-2 text-xs text-muted-foreground uppercase tracking-widest">
-                © {new Date().getFullYear()} Phuc Bui
             </div>
         </div>
     );

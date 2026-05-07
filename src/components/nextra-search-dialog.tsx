@@ -3,7 +3,6 @@
 import {useEffect, useRef, useState} from "react";
 import {addBasePath} from 'next/dist/client/add-base-path';
 import {useRouter} from "next/navigation";
-import {cn} from "@/lib/utils";
 import {PageItem} from "@/lib/getPagesFromPageMap";
 import {SearchIcon} from "lucide-react";
 import {Command as CommandPrimitive} from "cmdk";
@@ -142,19 +141,17 @@ export function NextraSearchDialog({placeholder = "Search...", pages = []}: Prop
 
             <CommandDialog open={open} onOpenChange={setOpen}
                            showCloseButton={false}
-                           className="search-dialog !max-w-[800px] overflow-hidden !bg-transparent px-2 border-none [&_.bg-popover]:bg-transparent">
+                           className="!p-0 !max-w-[720px] !bg-[var(--color-background)] !border !border-[var(--color-border)] !shadow-none !rounded-none [&_[data-slot=command]]:bg-transparent">
 
-                <div className="border-4 rounded-2xl bg-background">
-                    <SearchInput
-                        placeholder={placeholder}
-                        query={query}
-                        onQueryChange={setQuery}
-                    />
+                <SearchInput
+                    placeholder={placeholder}
+                    query={query}
+                    onQueryChange={setQuery}
+                />
 
-                    <CommandList className="h-96" aria-label="Search results list">
-                        <SearchContent/>
-                    </CommandList>
-                </div>
+                <CommandList className="h-96 border-t border-[var(--color-border)]" aria-label="Search results list">
+                    <SearchContent/>
+                </CommandList>
 
             </CommandDialog>
         </>
@@ -195,19 +192,15 @@ function SearchInput({
     onQueryChange: (value: string) => void;
 }) {
     return (
-        <div className="p-2">
-            <div className="bg-input h-10 w-full flex items-center gap-2 rounded-lg px-3">
-                <SearchIcon className="size-4 shrink-0 opacity-50"/>
-                <CommandPrimitive.Input
-                    data-slot="command-input"
-                    className={cn(
-                        "placeholder:text-muted-foreground flex h-10 w-full rounded-md bg-transparent py-3 text-sm outline-hidden disabled:cursor-not-allowed disabled:opacity-50",
-                    )}
-                    placeholder={placeholder}
-                    value={query}
-                    onValueChange={onQueryChange}
-                />
-            </div>
+        <div className="flex items-center gap-2 px-4 py-3">
+            <SearchIcon className="size-4 shrink-0 text-[var(--color-secondary)]"/>
+            <CommandPrimitive.Input
+                data-slot="command-input"
+                className="flex-1 bg-transparent text-sm text-[var(--color-foreground)] placeholder:text-[var(--color-secondary)] outline-none disabled:cursor-not-allowed disabled:opacity-50"
+                placeholder={placeholder}
+                value={query}
+                onValueChange={onQueryChange}
+            />
         </div>
     )
 }
@@ -217,19 +210,19 @@ function SearchTrigger({placeholder, onClick}: { placeholder: string; onClick: (
     return (
         <button
             onClick={onClick}
-            className="p-button !pr-1"
+            className="inline-flex w-full relative items-center gap-2 text-sm cursor-pointer outline-none bg-transparent border-none p-0 text-[var(--color-secondary)] hover:text-[var(--color-foreground)] transition-colors"
         >
-            {/*<SearchIcon className="size-4"/>*/}
-            <span>{placeholder}</span>
-            <Kbd className="gap-0">⌘K</Kbd>
+            <SearchIcon className="size-3.5 shrink-0"/>
+            <span className="flex-1 text-left">{placeholder}</span>
+            <Kbd className="text-[10px] opacity-50"><span>⌘</span>K</Kbd>
         </button>
     );
 }
 
 function SearchLoading() {
     return (
-        <div className="py-6 text-center text-sm text-gray-500">
-            <div className="inline-block animate-spin rounded-full h-4 w-4 border-b-2 border-gray-900"></div>
+        <div className="py-6 text-center text-sm text-[var(--color-secondary)]">
+            <div className="inline-block animate-spin h-3.5 w-3.5 border border-[var(--color-border)] border-t-[var(--color-accent)]"></div>
             <span className="ml-2">Searching...</span>
         </div>
     );
@@ -237,7 +230,7 @@ function SearchLoading() {
 
 function SearchError({message}: { message: string }) {
     return (
-        <div className="py-6 px-4 text-center text-sm text-red-500">
+        <div className="py-6 px-4 text-center text-sm text-[var(--color-secondary)]">
             {message}
         </div>
     );
@@ -275,17 +268,17 @@ function SearchItem({url, title, description, onSelect, value, parent}: {
 }) {
     return (
         <CommandItem onSelect={() => onSelect(url)} value={value} className="cursor-pointer">
-            <div className="flex flex-col gap-1 w-full">
+            <div className="flex flex-col gap-0.5 w-full">
                 <div className="flex items-center gap-1">
                     {parent && (
                         <>
-                            <span className="text-xs text-muted-foreground">{parent}</span>
-                            <span className="text-xs text-muted-foreground">/</span>
+                            <span className="text-xs text-[var(--color-secondary)]">{parent}</span>
+                            <span className="text-xs text-[var(--color-border)]">/</span>
                         </>
                     )}
-                    <div className="font-semibold">{title}</div>
+                    <div className="text-sm font-medium text-[var(--color-foreground)]">{title}</div>
                 </div>
-                <div className="text-xs text-muted-foreground">
+                <div className="text-xs text-[var(--color-secondary)] leading-relaxed">
                     {description}
                 </div>
             </div>
@@ -333,7 +326,7 @@ function highlightQuery(text: string, query: string) {
 
     return parts.map((part, index) =>
         regex.test(part) ? <mark key={index}
-                                 className="bg-primary text-primary-foreground rounded-[3px] font-medium">{part}</mark> : part
+                                 className="bg-[var(--color-accent-subtle)] text-[var(--color-accent)] font-medium">{part}</mark> : part
     );
 }
 

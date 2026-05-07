@@ -5,16 +5,13 @@ export function Logo({hasLink = true, title = "Go to home"}) {
     return (
         <>
             {hasLink &&
-                <Link href="/" title={title} className="no-underline inline-flex gap-1 items-center text-2xl hover:bg-muted">
+                <Link href="/" title={title} className="no-underline inline-flex gap-1 items-center hover:opacity-80">
                     <LogoIcon/>
-                    {/*<span>Phúc Bùi</span>*/}
                 </Link>}
-
             {!hasLink && <LogoIcon/>}
         </>
     );
 }
-
 
 export function LogoIcon() {
     return (
@@ -36,8 +33,7 @@ export function LogoIcon() {
           }
         }
       `}</style>
-
-            <div className="w-[35px] aspect-square relative [--bg:rgba(0,0,0,0)] [--color:#000] dark:[--color:#179cf9]">
+            <div className="w-[35px] aspect-square relative [--bg:rgba(0,0,0,0)] [--color:var(--color-foreground)] dark:[--color:#179cf9]">
                 <div className="pixelart-to-css absolute top-[-5px] left-[-5px]"/>
             </div>
         </>

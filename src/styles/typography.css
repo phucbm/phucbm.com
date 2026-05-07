@@ -1,39 +1,49 @@
-.x\:prose {
-    --tw-prose-body:var(--foreground);
-}
-
 @layer utilities {
-    /* Applied explicitly to hero name/title only */
+    /* ── MDX heading classes (used by mdx-components.tsx) ── */
+
     .brut-h1 {
-        font-size: clamp(3rem, 8vw, 6rem);
-        font-weight: 800;
-        letter-spacing: -0.04em;
-        line-height: 0.88;
-        text-transform: uppercase;
-        margin-bottom: 0.5rem;
+        font-family:var(--font-garamond), serif;
+        font-size:1.667rem; /* 30px at 18px base */
+        font-weight:400;
+        line-height:1.3;
+        color:var(--color-foreground);
+        margin-bottom:1rem;
     }
 
     .heading-2 {
-        @apply text-[1.3em] font-bold;
-        margin-top: 2rem;
-        margin-bottom: 0.5rem;
+        font-family:var(--font-garamond), serif;
+        font-size:1.3rem; /* 20px */
+        font-weight:400;
+        line-height:1.3;
+        color:var(--color-foreground);
+        margin-top:2.5rem;
+        margin-bottom:1rem;
     }
+
     .heading-3 {
-        @apply text-[1.1em] font-semibold;
+        font-family:var(--font-garamond), serif;
+        font-size:1rem; /* 18px */
+        font-weight:400;
+        color:var(--color-foreground);
         margin-top: 1.5rem;
         margin-bottom: 0.25rem;
     }
+
     .heading-4 {
-        @apply text-[1em] font-semibold;
+        font-family:var(--font-sans), sans-serif;
+        font-size:1rem; /* 18px */
+        font-weight:400;
+        color:var(--color-secondary);
     }
 
+    /* ── UI button (used by nextra-search-dialog, select) ── */
     .p-button {
         box-shadow:0 8px 12px #0000000f, 0 4px 8px #00000014, 0 1px 2px #0000001f, inset 0 1.5px 1px #ffffff47;
         @apply border border-brand-accent;
-        @apply text-xs transition-none cursor-pointer;
+        @apply transition-none cursor-pointer;
         @apply bg-brand text-brand-foreground rounded-md px-2 py-1;
         @apply inline-flex items-center justify-center text-center gap-2;
-
         @apply hover:bg-brand-accent;
+        font-size:1rem; /* 18px minimum */
     }
 }

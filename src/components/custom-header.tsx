@@ -1,36 +1,42 @@
 import React from 'react';
 import {Logo} from "@/components/logo";
-import {MenuBar} from "@/components/menu-bar";
-import {MobileMenu} from "@/components/mobile-menu";
+import Link from 'next/link'
+import {ThemeSwitch} from "nextra-theme-blog";
+import {NextraSearchDialog} from "@/components/nextra-search-dialog";
+import {getPagesFromPageMap} from "@/lib/getPagesFromPageMap";
 import {getPageMap} from "nextra/page-map";
-import {normalizePages, PageItem} from 'nextra/normalize-pages'
-import type {MenuItem} from 'nextra'
 
-type ExtendedNavbarItem = (PageItem | MenuItem) & {
-    href?: string;
-    title?: string;
-}
+const NAV_ITEMS = [
+    {href: '/bookmarks', title: 'Bookmarks'},
+    {href: '/components', title: 'Components'},
+]
 
 const CustomHeader = async () => {
-    const pageMap = await getPageMap()
-    const {topLevelNavbarItems} = normalizePages({list: pageMap, route: '/'})
-
-    const navItems = topLevelNavbarItems
-        .filter(item => item.display !== 'hidden')
-        .map(item => {
-            const extended = item as ExtendedNavbarItem
-            return {
-                href: ('route' in extended ? extended.route : extended.href) || '',
-                title: typeof extended.title === 'string' ? extended.title : String(extended.title ?? ''),
-            }
-        })
-        .filter(item => item.href && item.title)
+    const pages = await getPagesFromPageMap({pageMap: await getPageMap()})
 
     return (
-        <div className="custom-header flex items-center justify-between py-3 px-1 border-b-2 border-foreground">
-            <Logo/>
-            <MenuBar className="hidden sm:flex"/>
-            <MobileMenu navItems={navItems}/>
+        <div className="flex items-center justify-between gap-6" data-pagefind-ignore="all">
+            {/*left*/}
+            <div className="flex items-center justify-start gap-6">
+                <Logo/>
+                <nav className="flex gap-4">
+                    {NAV_ITEMS.map(({href, title, external}) => (
+                        <Link
+                            key={href}
+                            href={href}
+                            className="nav-link text-sm no-underline"
+                            {...(external ? {target: '_blank', rel: 'noopener noreferrer'} : {})}
+                        >
+                            {title}
+                        </Link>
+                    ))}
+                </nav>
+            </div>
+            {/*right*/}
+            <div className="flex items-center justify-end gap-6">
+                <NextraSearchDialog placeholder="Search" pages={pages}/>
+                <ThemeSwitch/>
+            </div>
         </div>
     );
 };

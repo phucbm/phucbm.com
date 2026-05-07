@@ -1,107 +1,54 @@
-/*Override nextra style*/
+/* ── COLORS ──────────────────────────────────────────── */
+
+:root {
+  --color-background: #F5F3EF;  /* Parchment */
+  --color-foreground: #1E1C18;   /* Ink – headings */
+  --color-muted: #3A3830;        /* Stone – body text */
+  --color-secondary: #5A5248;    /* Graphite – secondary text */
+  --color-accent: #2D5A8E;       /* Dusty Blue – links/hover */
+  --color-accent-subtle: #2D5A8E14; /* Blue tint */
+  --color-accent-underline: #2D5A8E44; /* Blue border */
+  --color-border: #D6D3CC;       /* Hairline */
+  --color-surface: #FAF9F6;      /* Hover surface */
+  --color-current: #8A8070;      /* Dust – muted text */
+}
+
+.dark {
+  --color-background: #1E1C18;
+  --color-foreground: #F5F3EF;
+  --color-muted: #D6D3CC;
+  --color-secondary: #8A8070;
+  --color-accent: #5B9BD5;
+  --color-accent-subtle: #5B9BD514;
+  --color-accent-underline: #5B9BD544;
+  --color-border: #3A3830;
+  --color-surface: #2A2820;
+  --color-current: #5A5248;
+}
+
+/* ── OVERRIDE NEXTRA ─────────────────────────────────── */
+
 .article-container > article.x\:container {
-    @apply max-w-[768px] py-0;
+  @apply max-w-[640px] py-0;
 }
 
 .content-wrapper > :first-child {
-    @apply mt-0;
+  @apply mt-0;
 }
 .content-wrapper > :last-child {
-    @apply mb-0;
+  @apply mb-0;
 }
 
-
-/*Dev style*/
-@layer utilities {
-    .decor-marks {
-        @apply text-muted-foreground opacity-30 pointer-events-none select-none;
-    }
-    .dev-borders {
-        @apply border border-dashed border-brand/20;
-    }
-    .dev-borders-y {
-        @apply border border-dashed border-brand/20;
-        @apply border-x-0;
-    }
-    .dev-gap-bg {
-        background:url(
-        data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAARUlEQVR4AYzMQQ4AEBADQFw8wQu9ygs9wYnsQbJly/bUJpOmoFLamGpCBdhrjgwDlAuGL8iwCS1M4YmfUOMv3NgFBbvhAgAA//+tp1XBAAAABklEQVQDABNjHBU19V/QAAAAAElFTkSuQmCC
-        ) repeat;
-    }
-}
-
-@layer utilities {
-    .px-bg-pattern-transparent {
-        --tile-color:rgba(68, 76, 247, 0.04);
-        --bg-color:var(--background);
-        background-color:var(--bg-color);
-        background-image:repeating-linear-gradient(
-            45deg,
-            var(--tile-color) 25%,
-            transparent 25%,
-            transparent 75%,
-            var(--tile-color) 75%,
-            var(--tile-color)
-        ),
-        repeating-linear-gradient(
-            45deg,
-            var(--tile-color) 25%,
-            var(--bg-color) 25%,
-            var(--bg-color) 75%,
-            var(--tile-color) 75%,
-            var(--tile-color)
-        );
-        background-position:0 0, 10px 10px;
-        background-size:20px 20px;
-    }
-    .dark .px-bg-pattern-transparent {
-        --tile-color:rgba(255, 255, 255, 0.015);
-        --bg-color:#24292e;
-    }
-
-    .px-bg-diagonal {
-        --tile-color:rgba(68, 76, 247, 0.3);
-        --bg-color:var(--background);
-        background-color:var(--bg-color);
-
-        opacity:1;
-        background-image:radial-gradient(var(--tile-color) 0.75px, var(--bg-color) 0.75px);
-        background-size:15px 15px;
-    }
-    .dark .px-bg-diagonal {
-        --tile-color:rgba(255, 255, 255, 0.2);
-        --bg-color:#24292e;
-    }
-
-    .px-border {
-        @apply border border-dashed border-border rounded-md;
-    }
-
-    .px-bg-blur {
-        @apply bg-background/30 backdrop-blur supports-[backdrop-filter]:bg-background/50;
-    }
-}
-
-/* ── BRUTALIST ─────────────────────────────────────────── */
-
+/* Horizontal rules */
 article hr {
-    border: none;
-    border-top: 2px solid #0033FF;
-    margin: 2rem 0;
+  border: none;
+  border-top: 0.5px solid var(--color-border);
+  margin: 0;
 }
 
+/* Link hover */
+.dark article a:hover,
 article a:hover {
-    color: #0033FF;
-    text-decoration-color: #0033FF;
-}
-
-/* CRT scanlines in dark mode */
-.dark body {
-    background-image: repeating-linear-gradient(
-        0deg,
-        transparent,
-        transparent 3px,
-        rgba(0, 0, 0, 0.04) 3px,
-        rgba(0, 0, 0, 0.04) 4px
-    );
+  color: var(--color-accent);
+  text-decoration-color: var(--color-accent);
 }

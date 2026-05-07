@@ -7,7 +7,7 @@ import {Layout} from "nextra-theme-blog";
 import {GoogleAnalytics} from '@next/third-parties/google'
 import {_metadata} from "@/lib/seo";
 import {generatePageMetadata} from "@phucbm/next-og-image";
-import localFont from 'next/font/local'
+import {EB_Garamond, Plus_Jakarta_Sans} from 'next/font/google'
 import {Gap} from "@/components/gap";
 import React from "react";
 
@@ -16,19 +16,18 @@ export const generateMetadata = generatePageMetadata({
     canonicalPath: "/"
 });
 
-// const bodyFont = Inter({
-//     subsets: ['latin', 'vietnamese'],
-//     variable: '--font-inter'
-// })
-const bodyFont = localFont({
-    src: [
-        {
-            path: '../../public/fonts/JetBrainsMono[wght].ttf',
-            // style: "normal",
-            // weight: "100 900",
-        },
-    ],
-    variable: "--font-jetbrains-mono",
+const garamond = EB_Garamond({
+    subsets: ['latin', 'vietnamese'],
+    variable: '--font-garamond',
+    display: 'swap',
+    weight: ['400'],
+});
+
+const sans = Plus_Jakarta_Sans({
+    subsets: ['latin', 'vietnamese'],
+    variable: '--font-sans',
+    display: 'swap',
+    weight: ['300', '400', '500'],
 });
 
 export default async function RootLayout({children}) {
@@ -41,17 +40,16 @@ export default async function RootLayout({children}) {
             // Suggested by `next-themes` package https://github.com/pacocoursey/next-themes#with-app
             suppressHydrationWarning
 
-            className={bodyFont.className}
+            className={`${garamond.variable} ${sans.variable}`}
         >
         <Head backgroundColor={{dark: '#15120d', light: '#faf5e9'}}>
             <script defer src="https://cloud.umami.is/script.js"
                     data-website-id="f14c0833-d850-4d09-9c74-95cc97d95dc0"></script>
         </Head>
         <body className="min-h-screen">
-        <div className="article-container">
-            <Layout>
-                <div className="flex flex-col justify-between">
-                    <Gap height={4} className="!border-t-0"/>
+        <div className="bg-[var(--color-background)]">
+            <div className="max-w-[820px] mx-auto px-10">
+                <Layout>
                     <CustomHeader/>
                     <Gap height={14}/>
                     <div className="py-2 px-1">
@@ -59,9 +57,8 @@ export default async function RootLayout({children}) {
                     </div>
                     <Gap height={14}/>
                     <CustomFooter/>
-                    <Gap height={4} className="!border-b-0"/>
-                </div>
-            </Layout>
+                </Layout>
+            </div>
         </div>
         </body>
         <GoogleAnalytics gaId="G-HXCF8TGQLN"/>
