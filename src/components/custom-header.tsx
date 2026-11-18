@@ -5,8 +5,9 @@ import {ThemeSwitch} from "nextra-theme-blog";
 import {NextraSearchDialog} from "@/components/nextra-search-dialog";
 import {getPagesFromPageMap} from "@/lib/getPagesFromPageMap";
 import {getPageMap} from "nextra/page-map";
+import {MobileMenu} from "@/components/mobile-menu";
 
-const NAV_ITEMS = [
+const NAV_ITEMS: { href: string; title: string; external?: boolean }[] = [
     {href: '/bookmarks', title: 'Bookmarks'},
     {href: '/components', title: 'Components'},
 ]
@@ -15,11 +16,11 @@ const CustomHeader = async () => {
     const pages = await getPagesFromPageMap({pageMap: await getPageMap()})
 
     return (
-        <div className="flex items-center justify-between gap-6" data-pagefind-ignore="all">
+        <div className="flex items-center justify-between gap-4 sm:gap-6" data-pagefind-ignore="all">
             {/*left*/}
-            <div className="flex items-center justify-start gap-6">
+            <div className="flex items-center justify-start gap-4 sm:gap-6">
                 <Logo/>
-                <nav className="flex gap-4">
+                <nav className="hidden sm:flex gap-4">
                     {NAV_ITEMS.map(({href, title, external}) => (
                         <Link
                             key={href}
@@ -33,9 +34,10 @@ const CustomHeader = async () => {
                 </nav>
             </div>
             {/*right*/}
-            <div className="flex items-center justify-end gap-6">
+            <div className="flex items-center justify-end gap-3 sm:gap-6">
                 <NextraSearchDialog placeholder="Search" pages={pages}/>
-                <ThemeSwitch/>
+                <div className="hidden sm:flex"><ThemeSwitch/></div>
+                <MobileMenu navItems={NAV_ITEMS}/>
             </div>
         </div>
     );

@@ -48,7 +48,7 @@ export default async function RootLayout({children}) {
         </Head>
         <body className="min-h-screen">
         <div className="bg-[var(--color-background)]">
-            <div className="max-w-[820px] mx-auto px-10">
+            <div className="max-w-[820px] mx-auto px-4 sm:px-8 md:px-10">
                 <Layout>
                     <CustomHeader/>
                     <Gap height={14}/>
